@@ -1,0 +1,9 @@
+# Normalize line endings to LF in the repo (Vercel builds on Linux). Working
+# copies on Windows can still check out CRLF without affecting the build.
+* text=auto eol=lf
+
+# Treat these as binary so Git never touches their bytes.
+*.png binary
+*.woff binary
+*.woff2 binary
+*.ico binary
