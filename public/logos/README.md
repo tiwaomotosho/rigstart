@@ -1,14 +1,15 @@
 # Company logos
 
-One PNG per unique company, named by the slug from `slugifyCompany()` in
-`src/data/attendees.ts` (lowercase, spaces → hyphens, non `[a-z0-9-]` stripped).
+One PNG per unique company in `public/attendees.csv`, named by the slug from
+`slugifyCompany()` (lowercase, spaces → hyphens, non `[a-z0-9-]` stripped) —
+e.g. `Atlas Offshore Drilling` → `atlas-offshore-drilling.png`.
 
-The files here are **placeholders** (gray wordmarks). To use a real logo, drop a
-PNG with the matching slug filename — e.g. `seplat-energy.png` — and it replaces
-the placeholder automatically. If a logo file is missing at runtime, the app
-falls back to rendering the company name as bold text (no broken-image icon).
+The shipped files are **placeholders**: light wordmarks for the dark theme. Drop
+a real logo (ideally a light/white PNG with transparent background) at the
+matching slug filename to replace one. If a logo is missing at runtime the slide
+still shows the company name as the headline — nothing breaks.
 
-Regenerate the placeholders with:
+Regenerate placeholders (reads the CSV) with:
 
 ```
 python scripts/generate-placeholder-logos.py

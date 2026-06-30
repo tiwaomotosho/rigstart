@@ -1,49 +1,44 @@
 @import "tailwindcss" source(none);
 @source "../src";
 
-/* Inter — self-hosted via @fontsource so the display works offline at the venue
-   (no Google Fonts CDN dependency during a live event). Weights per spec §2. */
+/* Self-hosted fonts (offline-safe for a live venue). Space Grotesk = display /
+   numerals; Inter = body. */
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
-@import "@fontsource/inter/800.css";
-@import "@fontsource/inter/900.css";
 
-/* Color tokens as Tailwind theme colors (spec §3). Token name -> utility class,
-   e.g. `--color-navy-900` powers `bg-navy-900` / `text-navy-900`. */
+/* Dark cinematic theme tokens. */
 @theme {
-  --color-bg-canvas: #fafaf7;
-  --color-bg-canvas-alt: #f2f1ea;
-  --color-navy-900: #16213e;
-  --color-navy-700: #233156;
-  --color-slate-500: #5a6478;
-  --color-slate-300: #aeb9d0;
-  --color-green-500: #3da935;
-  --color-green-700: #2e8128;
-  --color-green-100: #ebf6ea;
-  --color-red-500: #d81f26;
-  --color-border-hairline: #dce3ee;
-  --color-white-pure: #ffffff;
+  --color-base: #05070d;
+  --color-ink-900: #0a0e16;
+  --color-text: #f5f7fa;
+  --color-text-muted: #9aa3b2;
+  --color-text-faint: #5b6472;
+  --color-accent: #e8b04b;
+  --color-accent-deep: #c8902f;
+  --color-line: rgba(245, 247, 250, 0.1);
 
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Same tokens as raw CSS custom properties on :root (spec §3 — "both, so either
-   can be used"). The pixel-exact layout in src/components consumes these. */
 :root {
-  --bg-canvas: #fafaf7;
-  --bg-canvas-alt: #f2f1ea;
-  --navy-900: #16213e;
-  --navy-700: #233156;
-  --slate-500: #5a6478;
-  --slate-300: #aeb9d0;
-  --green-500: #3da935;
-  --green-700: #2e8128;
-  --green-100: #ebf6ea;
-  --red-500: #d81f26;
-  --border-hairline: #dce3ee;
-  --white-pure: #ffffff;
+  --base: #05070d;
+  --ink-900: #0a0e16;
+  --text: #f5f7fa;
+  --text-muted: #9aa3b2;
+  --text-faint: #5b6472;
+  --accent: #e8b04b;
+  --accent-deep: #c8902f;
+  --line: rgba(245, 247, 250, 0.1);
+
+  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 *,
@@ -57,12 +52,18 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* no scrolling anywhere in this app (spec §0) */
+  overflow: hidden; /* no scrolling anywhere (full-screen display) */
 }
 
 body {
-  background: #000000; /* letterbox bars outside the 1920x1080 canvas (spec §8) */
-  font-family: var(--font-sans);
+  background: #000000; /* letterbox bars outside the 1920x1080 canvas */
+  font-family: var(--sans);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
 }

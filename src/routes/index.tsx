@@ -1,46 +1,104 @@
+import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { attendees } from "@/data/attendees";
 import { buildSlides } from "@/lib/buildSlides";
+import { assignBackgrounds, RIG_BACKGROUNDS } from "@/data/backgrounds";
+import { containerVariants } from "@/lib/motionVariants";
+import { useAttendees } from "@/hooks/useAttendees";
 import { useSlideNavigation } from "@/hooks/useSlideNavigation";
 import { StageCanvas } from "@/components/StageCanvas";
+import { RigBackground } from "@/components/RigBackground";
 import { CompanySlide } from "@/components/CompanySlide";
-import { SeplatWordmark } from "@/components/SeplatWordmark";
-import { SlideIndicator } from "@/components/SlideIndicator";
+import { EventChrome } from "@/components/EventChrome";
 
-// Slides are derived once from the static seed data (spec §5).
-const slides = buildSlides(attendees);
+const BRAND = "RIGSTART";
+const EVENT_TITLE = "Energy Leaders Forum 2026";
 
 export const Route = createFileRoute("/")({
   component: Display,
 });
 
 function Display() {
-  const { currentIndex, direction } = useSlideNavigation(slides.length);
-  const slide = slides[currentIndex];
+  const { attendees } = useAttendees();
+
+  const slides = useMemo(() => (attendees ? buildSlides(attendees) : []), [attendees]);
+  const backgroundForCompany = useMemo(() => {
+    const companies = [...new Set(slides.map((s) => s.company))];
+    return assignBackgrounds(companies);
+  }, [slides]);
+
+  const { currentIndex } = useSlideNavigation(slides.length);
+
+  if (!attendees || slides.length === 0) {
+    return (
+      <StageCanvas>
+        <LoadingScreen />
+      </StageCanvas>
+    );
+  }
+
+  const index = Math.min(currentIndex, slides.length - 1);
+  const slide = slides[index];
+  const background = backgroundForCompany[slide.company] ?? RIG_BACKGROUNDS[0];
 
   return (
     <StageCanvas>
-      {/* Persistent corner UI — does not animate between slides (spec §6.6/§6.7) */}
-      <SeplatWordmark />
+      <RigBackground src={background} />
 
-      {/* mode="wait" + key per slide: the outgoing slide fully exits before the
-          incoming one enters. The two inner groups carry the distinct timing. */}
-      <AnimatePresence mode="wait" custom={direction} initial={false}>
+      <EventChrome
+        brand={BRAND}
+        eventTitle={EVENT_TITLE}
+        currentIndex={index}
+        totalSlides={slides.length}
+      />
+
+      <AnimatePresence mode="wait">
         <motion.div
-          key={currentIndex}
-          custom={direction}
-          initial="enter"
-          animate="center"
+          key={index}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
           exit="exit"
           style={{ position: "absolute", inset: 0 }}
         >
-          <CompanySlide slide={slide} direction={direction} />
+          <CompanySlide slide={slide} />
         </motion.div>
       </AnimatePresence>
-
-      <SlideIndicator currentIndex={currentIndex} totalSlides={slides.length} />
     </StageCanvas>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: "var(--base)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 16,
+      }}
+    >
+      <motion.span
+        animate={{ opacity: [0.3, 1, 0.3] }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--accent)" }}
+      />
+      <span
+        style={{
+          fontFamily: "var(--display)",
+          fontWeight: 600,
+          fontSize: 22,
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          color: "var(--text-muted)",
+        }}
+      >
+        Preparing the room
+      </span>
+    </div>
   );
 }
