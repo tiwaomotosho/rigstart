@@ -23,18 +23,19 @@ W, H = 1920, 1080
 OUT_DIR = Path(__file__).resolve().parent.parent / "public" / "backgrounds"
 FLARE = (255, 150, 60)
 
-# (sky_top, horizon_glow, water_base, name)
+# Seplat-themed dark story: green-forward with red/amber accents (brand red +
+# green). (sky_top, horizon_glow, water_base, name)
 PALETTES = [
-    ((9, 18, 36), (232, 119, 46), (6, 12, 22), "amber-dusk"),
-    ((4, 18, 24), (18, 120, 126), (3, 12, 16), "midnight-teal"),
-    ((16, 24, 40), (120, 150, 190), (10, 16, 26), "steel-dawn"),
-    ((16, 8, 20), (181, 38, 59), (12, 6, 14), "crimson-nightfall"),
-    ((14, 28, 46), (240, 168, 48), (8, 16, 26), "golden-hour"),
-    ((22, 32, 40), (150, 178, 192), (16, 24, 30), "arctic-fog"),
-    ((12, 9, 30), (120, 70, 170), (8, 6, 20), "violet-dusk"),
-    ((8, 8, 12), (255, 110, 40), (6, 6, 8), "industrial-ember"),
-    ((2, 14, 28), (34, 100, 168), (1, 9, 18), "deep-sea"),
-    ((24, 18, 14), (212, 98, 42), (14, 10, 8), "sunset-rust"),
+    ((6, 14, 10), (95, 176, 48), (4, 10, 8), "seplat-green-dusk"),
+    ((14, 7, 6), (200, 54, 34), (10, 5, 5), "ember-red"),
+    ((7, 12, 10), (74, 150, 70), (5, 9, 8), "forest-dusk"),
+    ((12, 9, 8), (196, 84, 40), (9, 6, 6), "rust-red"),
+    ((6, 11, 9), (110, 190, 70), (4, 8, 7), "leaf-glow"),
+    ((11, 15, 13), (120, 156, 108), (8, 11, 10), "sage-steel"),
+    ((5, 9, 8), (46, 140, 62), (3, 7, 6), "deep-green-sea"),
+    ((13, 7, 6), (225, 72, 38), (9, 5, 4), "red-industrial"),
+    ((7, 12, 11), (64, 132, 92), (5, 9, 8), "teal-green"),
+    ((11, 11, 8), (210, 128, 52), (8, 8, 6), "amber-green"),
 ]
 
 RIG_TYPES = ["offshore", "derrick_cluster", "jackup", "drillship", "single_derrick"]

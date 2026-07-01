@@ -28,7 +28,7 @@ export function CompanySlide({ slide }: CompanySlideProps) {
           left: 140,
           top: 0,
           bottom: 0,
-          width: 820,
+          width: 800,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -41,12 +41,12 @@ export function CompanySlide({ slide }: CompanySlideProps) {
             alt={slide.company}
             onError={() => setLogoFailed(true)}
             style={{
-              height: 46,
-              maxWidth: 540,
+              height: 62,
+              maxWidth: 620,
               objectFit: "contain",
               objectPosition: "left center",
-              opacity: 0.9,
-              marginBottom: 28,
+              opacity: 0.95,
+              marginBottom: 34,
             }}
           />
         )}
@@ -55,9 +55,9 @@ export function CompanySlide({ slide }: CompanySlideProps) {
           variants={itemVariants}
           style={{
             fontFamily: "var(--sans)",
-            fontWeight: 600,
-            fontSize: 14,
-            letterSpacing: "0.34em",
+            fontWeight: 700,
+            fontSize: 19,
+            letterSpacing: "0.36em",
             textTransform: "uppercase",
             color: "var(--accent)",
           }}
@@ -70,13 +70,13 @@ export function CompanySlide({ slide }: CompanySlideProps) {
           style={{
             fontFamily: "var(--display)",
             fontWeight: 700,
-            fontSize: 88,
-            lineHeight: 0.98,
-            letterSpacing: "-0.025em",
+            fontSize: 124,
+            lineHeight: 0.95,
+            letterSpacing: "-0.03em",
             color: "var(--text)",
-            margin: "18px 0 0",
-            maxWidth: 820,
-            textShadow: "0 6px 40px rgba(0,0,0,0.45)",
+            margin: "22px 0 0",
+            maxWidth: 800,
+            textShadow: "0 6px 44px rgba(0,0,0,0.5)",
           }}
         >
           {slide.company}
@@ -85,11 +85,11 @@ export function CompanySlide({ slide }: CompanySlideProps) {
         <motion.div
           variants={lineVariants}
           style={{
-            height: 3,
-            width: 132,
-            marginTop: 32,
+            height: 4,
+            width: 190,
+            marginTop: 40,
             transformOrigin: "left center",
-            background: "linear-gradient(90deg, var(--accent), rgba(232,176,75,0))",
+            background: "linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%)",
           }}
         />
 
@@ -98,10 +98,10 @@ export function CompanySlide({ slide }: CompanySlideProps) {
           style={{
             fontFamily: "var(--sans)",
             fontWeight: 500,
-            fontSize: 18,
+            fontSize: 25,
             letterSpacing: "0.02em",
             color: "var(--text-muted)",
-            marginTop: 26,
+            marginTop: 32,
           }}
         >
           {meta}

@@ -13,8 +13,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RIGSTART — Energy Leaders Forum" },
-      { name: "description", content: "Full-screen company hero roll for a live event." },
+      { title: "Seplat — Safety Leadership Forum" },
+      { name: "description", content: "Leading with Safety, Driving Performance." },
       { name: "theme-color", content: "#05070d" },
     ],
     links: [

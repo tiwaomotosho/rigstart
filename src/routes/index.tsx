@@ -12,8 +12,8 @@ import { RigBackground } from "@/components/RigBackground";
 import { CompanySlide } from "@/components/CompanySlide";
 import { EventChrome } from "@/components/EventChrome";
 
-const BRAND = "RIGSTART";
-const EVENT_TITLE = "Energy Leaders Forum 2026";
+const EVENT_TITLE = "Safety Leadership Forum";
+const TAGLINE = "Leading with Safety, Driving Performance";
 
 export const Route = createFileRoute("/")({
   component: Display,
@@ -47,8 +47,8 @@ function Display() {
       <RigBackground src={background} />
 
       <EventChrome
-        brand={BRAND}
         eventTitle={EVENT_TITLE}
+        tagline={TAGLINE}
         currentIndex={index}
         totalSlides={slides.length}
       />

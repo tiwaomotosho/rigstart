@@ -67,6 +67,35 @@ def best_font(draw, text, font_path, max_w, max_h):
     return chosen
 
 
+SEPLAT_RED = (225, 37, 27, 255)
+SEPLAT_GREEN = (95, 176, 48, 255)
+
+
+def render_seplat(font_path):
+    """Brand-coloured Seplat wordmark: red 'Seplat' + green 'energy' beneath."""
+    img = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    main_font = best_font(d, "Seplat", font_path, CANVAS[0] - 2 * H_PADDING, 130)
+    sub_font = ImageFont.truetype(font_path, int(main_font.size * 0.48))
+
+    mb = d.textbbox((0, 0), "Seplat", font=main_font)
+    mw, mh = mb[2] - mb[0], mb[3] - mb[1]
+    sb = d.textbbox((0, 0), "energy", font=sub_font)
+    sw, sh = sb[2] - sb[0], sb[3] - sb[1]
+
+    total_h = mh + int(sh * 0.55) + sh
+    top = (CANVAS[1] - total_h) / 2
+    mx = (CANVAS[0] - mw) / 2 - mb[0]
+    d.text((mx, top - mb[1]), "Seplat", font=main_font, fill=SEPLAT_RED)
+    # 'energy' tucked under the right half of the wordmark, like the real logo
+    sx = (CANVAS[0] + mw) / 2 - sw - sb[0]
+    sy = top + mh + int(sh * 0.55)
+    d.text((sx, sy - sb[1]), "energy", font=sub_font, fill=SEPLAT_GREEN)
+
+    img.save(OUT_DIR / "seplat.png", "PNG")
+    print("  wrote seplat.png (brand colours)")
+
+
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     font_path = find_font_path()
@@ -74,6 +103,9 @@ def main():
     max_h = CANVAS[1] - 2 * 40
 
     for company in unique_companies():
+        if slugify(company) == "seplat":
+            render_seplat(font_path)
+            continue
         text = company.upper()
         img = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)

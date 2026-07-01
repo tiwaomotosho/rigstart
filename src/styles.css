@@ -19,8 +19,10 @@
   --color-text: #f5f7fa;
   --color-text-muted: #9aa3b2;
   --color-text-faint: #5b6472;
-  --color-accent: #e8b04b;
-  --color-accent-deep: #c8902f;
+  --color-accent: #e1251b; /* Seplat red */
+  --color-accent-deep: #b01610;
+  --color-accent-2: #5fb030; /* Seplat green */
+  --color-accent-2-deep: #3e8c22;
   --color-line: rgba(245, 247, 250, 0.1);
 
   --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
@@ -33,8 +35,10 @@
   --text: #f5f7fa;
   --text-muted: #9aa3b2;
   --text-faint: #5b6472;
-  --accent: #e8b04b;
-  --accent-deep: #c8902f;
+  --accent: #e1251b; /* Seplat red */
+  --accent-deep: #b01610;
+  --accent-2: #5fb030; /* Seplat green */
+  --accent-2-deep: #3e8c22;
   --line: rgba(245, 247, 250, 0.1);
 
   --display: "Space Grotesk", "Inter", system-ui, sans-serif;
